@@ -1,2 +1,5 @@
+feedparser==6.0.8
 fastapi
 uvicorn
+PyYAML
+python-dateutil

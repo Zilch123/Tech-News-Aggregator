@@ -1,0 +1,34 @@
+feeds:
+  "Front End coding":
+    - name: "CSS Tricks"
+      url: "https://css-tricks.com/feed/"
+    - name: "Frontend Focus"
+      url: "https://frontendfoc.us/rss"
+    
+  "BackEnd":
+    - name: "Python Weekly"
+      url: "https://pythonweekly.com/rss"
+    - name: "Node Weekly"
+      url: "https://nodeweekly.com/rss"
+    
+  "datascience":
+    - name: "KDNuggets"
+      url: "https://www.kdnuggets.com/feed"
+    - name: "Analytics Vidhya"
+      url: "https://www.analyticsvidhya.com/feed/"
+    
+  "Operating System":
+    - name: "Linux Journal"
+      url: "https://www.linuxjournal.com/node/feed"
+    
+  "OpenStreetMap":
+    - name: "OpenStreetMap Blog"
+      url: "https://blog.openstreetmap.org/feed/"
+    
+  "Generative AI":
+    - name: "Hugging Face Blog"
+      url: "https://huggingface.co/blog/feed.xml"
+
+  "Mathematics":
+    - name: "American Mathematical Society"
+      url: "https://blogs.ams.org/blogonmathblogs/feed/"

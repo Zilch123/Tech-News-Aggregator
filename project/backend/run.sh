@@ -1,3 +1,4 @@
 #!/bin/bash
+python -c 'import sys; print(sys.version_info[:])'
 pip install -r requirements.txt
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+python3.11 -m uvicorn app.main:app --reload --port 8000
