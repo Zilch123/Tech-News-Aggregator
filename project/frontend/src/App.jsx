@@ -16,14 +16,11 @@ const TIME_PERIODS = [
 
 const TOPICS = [
   "Front End coding",
-  "UX UI design",
-  "Opensource",
   "BackEnd",
   "datascience",
   "Operating System",
   "OpenStreetMap",
   "Electronics",
-  "Comic",
   "Generative AI",
   "Mathematics"
 ];
@@ -64,75 +61,101 @@ const App = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 max-w-3xl">
-      <h1 className="text-2xl font-bold mb-6">Article Search</h1>
-      
-      <div className="space-y-4 mb-6">
-        <div>
-          <label className="block mb-2">Topic</label>
+    <div className="container mx-auto p-6 max-w-3xl bg-white shadow-md rounded-lg">
+      <h1 className="text-3xl font-extrabold text-gray-800 mb-8 text-center">
+        Article Search
+      </h1>
+  
+      {/* Horizontal Form Section */}
+      <div className="form-row">
+        {/* Topic Selector */}
+        <div className="dropdown-container">
+          <label className="dropdown-label" htmlFor="topic">
+            Topic
+          </label>
           <Select onValueChange={setTopic} value={topic}>
-            <SelectTrigger>
+            <SelectTrigger id="topic" className="dropdown-trigger">
               <SelectValue placeholder="Select topic" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="dropdown-content">
               {TOPICS.map((t) => (
-                <SelectItem key={t} value={t}>
+                <SelectItem key={t} value={t} className="dropdown-item">
                   {t}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
         </div>
-
-        <div>
-          <label className="block mb-2">Time Period</label>
+  
+        {/* Time Period Selector */}
+        <div className="dropdown-container">
+          <label className="dropdown-label" htmlFor="time-period">
+            Time Period
+          </label>
           <Select onValueChange={setTimePeriod} value={timePeriod}>
-            <SelectTrigger>
+            <SelectTrigger id="time-period" className="dropdown-trigger">
               <SelectValue placeholder="Select time period" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="dropdown-content">
               {TIME_PERIODS.map((t) => (
-                <SelectItem key={t} value={t}>
+                <SelectItem key={t} value={t} className="dropdown-item">
                   {t}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
         </div>
-
-        <Button 
-          onClick={handleSearch}
-          disabled={isLoading}
-          className="w-full"
-        >
-          {isLoading ? "Searching..." : "Search"}
-        </Button>
+  
+        {/* Submit Button */}
+        <div>
+          <Button onClick={handleSearch} disabled={isLoading} className="submit-button">
+            {isLoading ? (
+              <span className="flex items-center justify-center">
+                <svg className="spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v8H4z"
+                  ></path>
+                </svg>
+                Searching...
+              </span>
+            ) : (
+              "Search"
+            )}
+          </Button>
+        </div>
       </div>
-
-      {error && (
-        <div className="text-red-500 mb-4">{error}</div>
-      )}
-
-      <div className="space-y-4">
-        {articles.map((article, index) => (
-          <Card key={index}>
-            <CardContent className="p-4">
-              <h2 className="font-semibold mb-2">{article.title}</h2>
-              <p className="text-gray-600 mb-2">{article.summary}</p>
-              <a 
-                href={article.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                Read more
-              </a>
-              <div className="text-sm text-gray-500 mt-2">
-                {new Date(article.timestamp).toLocaleDateString()}
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+  
+      {/* Error Message */}
+      {error && <div className="error-message">{error}</div>}
+  
+      {/* Results Section */}
+      <div className="space-y-6">
+        {articles.length > 0 ? (
+          articles.map((article, index) => (
+            <Card key={index} className="results-card">
+              <CardContent className="results-card-content">
+                <h2 className="font-bold text-xl text-gray-800 mb-3">{article.title}</h2>
+                <p className="text-gray-600 mb-4">{article.summary}</p>
+                <a
+                  href={article.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:text-blue-600 underline"
+                >
+                  Read more
+                </a>
+                <div className="text-sm text-gray-500 mt-4">
+                  Published on: {new Date(article.timestamp).toLocaleDateString()}
+                </div>
+              </CardContent>
+            </Card>
+          ))
+        ) : (
+          <div className="text-center text-gray-500">No articles found. Try a different search.</div>
+        )}
       </div>
     </div>
   );
